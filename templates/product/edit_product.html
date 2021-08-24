@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <title>Adicionar Cliente</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Editar {{ product.name }}</h1>
+    <form action="/edit_product/{{ product.id }}" class="container" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" name="name", id="name" placeholder="Nome" class="form-control" value="{{ product.name }}">
+            </div>
+            <div class="col-md-6">
+                <input type="text" name="price" id="price" placeholder="Preço" class="form-control" value="{{ product.price }}" >
+            </div>
+            <div class="col-md-6">
+                <input type="text" name="description" id="description" placeholder="Descrição" class="form-control" value="{{ product.description }}" >
+            </div>
+            <div class="col-md-6">
+                <input type="text" name="players" id="players" placeholder="Nº  jogadores" class="form-control" value="{{ product.players }}" >
+            </div>
+            <div class="col-md-6">
+                <input type="text" name="age" id="age" placeholder="E-mail" class="form-control" value="{{ product.age }}" >
+            </div>
+        </div>
+        <br>
+        <div class="row col-xs-12">
+            <button type="submit" class="btn btn-block btn-success">Enviar</button>
+        </div>
+    </form>
+</body>
+</html>

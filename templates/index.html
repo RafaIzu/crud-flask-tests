@@ -8,38 +8,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 </head>
 <body>
-    <h1 style="text-align: center;">Crud Clientes</h1>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <a href="/add">Adicionar Cliente</a>
-            </div>
-            <div class="col-md-6">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>E-mail</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for c in consumers %}
-                        <tr>
-                            <td>{{c.name}}</td>
-                            <td>{{c.email}}</td>
-                            <td>
-                                <a href="/edit/{{c.id}}">Editar</a>
-                                <a href="/delete/{{c.id}}">Excluir</a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <h1>Cadastro de Cliente e produto</h1>
+    <h5>Selecione uma opção:</h5>
+    <div class="menu">
+        <ul>
+            <li><a href="/consumer">Cadastrar Cliente</a></li>
+            <li><a href="/product">Cadastrar Produto</a></li>
+        </ul>
     </div>
-
-
 </body>
 </html>

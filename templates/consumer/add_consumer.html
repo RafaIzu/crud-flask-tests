@@ -8,14 +8,17 @@
     <title>Adicionar Cliente</title>
 </head>
 <body>
-    <h1 style="text-align: center;">Editar {{ consumer.name }}</h1>
-    <form action="/edit/{{ consumer.id }}" class="container" method="post">
+    <h1 style="text-align: center;">Cadastrar novo cliente</h1>
+    <form action="/add_consumer" class="container" method="post">
         <div class="row">
             <div class="col-md-6">
-                <input type="text" name="name", id="name" placeholder="Nome" class="form-control" value="{{ consumer.name }}">
+                <input type="text" name="name", id="name" placeholder="Nome" class="form-control">
             </div>
             <div class="col-md-6">
-                <input type="text" name="email" id="email" placeholder="E-mail" class="form-control" value="{{ consumer.email }}" >
+                <input type="text" name="email" id="email" placeholder="E-mail" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <input type="text" name="password" id="password" placeholder="Senha" class="form-control">
             </div>
         </div>
         <br>
