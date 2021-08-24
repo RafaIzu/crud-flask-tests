@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, url_for
 from flask_sqlalchemy import SQLAlchemy
+from flask_bootstrap import Bootstrap
 
 from werkzeug.utils import redirect
 
@@ -9,8 +10,10 @@ db_name = 'delivery'
 db_user = 'postgres'
 db_password = 'toalha28'
 app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///delivery.sqlite3'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
+bootstrap = Bootstrap(app)
 
 db = SQLAlchemy(app)
 class Consumer(db.Model):
@@ -129,12 +132,12 @@ def delete_product(id):
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html'), 404
+    return render_template('errors/404.html'), 404
 
 
 @app.errorhandler(500)
 def internal_server_error(e):
-    return render_template('500.html'), 500
+    return render_template('erros/500.html'), 500
 
 if __name__ == "__main__":
     db.create_all()
