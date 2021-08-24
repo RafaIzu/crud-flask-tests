@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
-
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
 from werkzeug.utils import redirect
 
 app = Flask(__name__)
@@ -9,6 +11,7 @@ db_url = 'localhost:5432'
 db_name = 'delivery'
 db_user = 'postgres'
 db_password = 'toalha28'
+app.config['SECRET_KEY'] = 'super dupper hard'
 app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///delivery.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -44,6 +47,17 @@ class Product(db.Model):
         self.players = players
         self.age = age
 
+class ConsumerForm(FlaskForm):
+    name = StringField('Nome', validators=[DataRequired()])
+    email = StringField('E-mail', validators=[DataRequired()])
+    password = StringField('Senha', validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+class EditConsumerForm(FlaskForm):
+    name = StringField('Nome', validators=[DataRequired()])
+    email = StringField('E-mail', validators=[DataRequired()])
+    password = StringField('Senha', validators=[DataRequired()])
+    submit = SubmitField('Submit')
 
 @app.route('/')
 def index():
@@ -59,15 +73,26 @@ def consumer():
     return render_template('consumer/consumer.html', consumers=consumers)
 
 
+# @app.route("/add_consumer", methods=["GET", "POST"])
+# def add_consumer():
+#     if request.method == 'POST':
+#         consumer = Consumer(request.form['name'], request.form['email'],
+#                             request.form['password'])
+#         db.session.add(consumer)
+#         db.session.commit()
+#         return redirect(url_for('consumer'))
+#     return render_template('consumer/add_consumer.html')
+
 @app.route("/add_consumer", methods=["GET", "POST"])
 def add_consumer():
-    if request.method == 'POST':
-        consumer = Consumer(request.form['name'], request.form['email'],
-                            request.form['password'])
+    form = ConsumerForm()
+    if form.validate_on_submit():
+        consumer = Consumer(request.form['name'], request.form['email'], request.form['password'])
         db.session.add(consumer)
         db.session.commit()
         return redirect(url_for('consumer'))
-    return render_template('consumer/add_consumer.html')
+    return render_template('consumer/add_consumer.html', form=form)
+
 
 @app.route('/edit_consumer/<int:id>', methods=['GET', 'POST'])
 def edit_consumer(id):
